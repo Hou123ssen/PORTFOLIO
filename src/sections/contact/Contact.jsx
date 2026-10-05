@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { profile } from '../../data/profile.js';
 import { ContactModal } from './ContactModal.jsx';
 
@@ -45,12 +45,36 @@ const ctaClass =
 const footerClass =
   'mt-[clamp(58px,8vw,120px)] border-t border-[rgba(245,243,238,0.16)] pt-[clamp(22px,2.7vw,36px)]';
 
+const toastText = "Message sent successfully. I'll get back to you soon.";
+
 export function Contact() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isToastVisible, setIsToastVisible] = useState(false);
+  const contactTriggerRef = useRef(null);
 
   const closeContactModal = useCallback(() => {
     setIsContactModalOpen(false);
   }, []);
+
+  const handleContactSuccess = useCallback(() => {
+    setIsContactModalOpen(false);
+    setIsToastVisible(true);
+    window.setTimeout(() => contactTriggerRef.current?.focus(), 0);
+  }, []);
+
+  useEffect(() => {
+    if (!isToastVisible) {
+      return undefined;
+    }
+
+    const toastTimer = window.setTimeout(() => {
+      setIsToastVisible(false);
+    }, 3500);
+
+    return () => {
+      window.clearTimeout(toastTimer);
+    };
+  }, [isToastVisible]);
 
   return (
     <>
@@ -84,6 +108,7 @@ export function Contact() {
               <button
                 className={ctaClass}
                 onClick={() => setIsContactModalOpen(true)}
+                ref={contactTriggerRef}
                 type="button"
               >
                 <span className="text-[var(--ink)]">GET IN TOUCH</span>
@@ -140,7 +165,22 @@ export function Contact() {
           </footer>
         </div>
       </section>
-      <ContactModal isOpen={isContactModalOpen} onClose={closeContactModal} />
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={closeContactModal}
+        onSuccessComplete={handleContactSuccess}
+      />
+      <div
+        aria-live="polite"
+        className={`fixed bottom-5 right-5 z-[90] max-w-[min(360px,calc(100vw-32px))] border border-[rgba(245,243,238,0.18)] bg-[var(--ink)] px-4 py-3 font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-sm font-[420] leading-[1.25] tracking-[-0.005em] text-[var(--paper)] transition-all duration-300 ease-out max-[680px]:left-4 max-[680px]:right-4 max-[680px]:bottom-4 max-[680px]:max-w-none ${
+          isToastVisible
+            ? 'translate-y-0 opacity-100'
+            : 'pointer-events-none translate-y-3 opacity-0'
+        }`}
+        role="status"
+      >
+        {toastText}
+      </div>
     </>
   );
 }

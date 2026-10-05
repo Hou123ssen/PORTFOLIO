@@ -48,7 +48,7 @@ const statusText = {
   },
 };
 
-export function ContactModal({ isOpen, onClose }) {
+export function ContactModal({ isOpen, onClose, onSuccessComplete }) {
   const [status, setStatus] = useState('idle');
   const [formValues, setFormValues] = useState({
     name: '',
@@ -58,6 +58,7 @@ export function ContactModal({ isOpen, onClose }) {
     website: '',
   });
   const nameRef = useRef(null);
+  const successTimerRef = useRef(null);
 
   useEffect(() => {
     if (!isOpen) {
@@ -87,6 +88,20 @@ export function ContactModal({ isOpen, onClose }) {
       setStatus('idle');
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    if (status !== 'success') {
+      return undefined;
+    }
+
+    successTimerRef.current = window.setTimeout(() => {
+      onSuccessComplete();
+    }, 1200);
+
+    return () => {
+      window.clearTimeout(successTimerRef.current);
+    };
+  }, [onSuccessComplete, status]);
 
   if (!isOpen) {
     return null;
