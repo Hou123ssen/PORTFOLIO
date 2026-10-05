@@ -17,8 +17,11 @@ const linksClass =
 const actionsClass =
   'flex items-center justify-self-end gap-2 min-[960px]:max-[1100px]:gap-1.5';
 
+const socialCircleClass =
+  'group inline-grid h-9 w-9 cursor-pointer place-items-center rounded-full border border-[rgba(17,17,15,0.2)] bg-transparent text-[var(--ink)] transition-all duration-300 ease-out hover:scale-[1.04] hover:border-[var(--ink)] hover:bg-[var(--ink)] hover:text-[var(--paper)] focus-visible:scale-[1.04] focus-visible:border-[var(--ink)] focus-visible:bg-[var(--ink)] focus-visible:text-[var(--paper)] focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-[var(--ink)] [&_svg]:stroke-current';
+
 const iconButtonClass =
-  'inline-grid h-9 w-9 cursor-pointer place-items-center rounded-full border border-[rgba(17,17,15,0.2)] bg-transparent text-[var(--ink)] transition-all duration-300 ease-out hover:scale-[1.04] hover:border-[var(--ink)] hover:bg-[var(--ink)] hover:text-[var(--paper)] focus-visible:scale-[1.04] focus-visible:border-[var(--ink)] focus-visible:bg-[var(--ink)] focus-visible:text-[var(--paper)] focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-[var(--ink)] min-[960px]:max-[1100px]:h-[34px] min-[960px]:max-[1100px]:w-[34px] max-[900px]:[&:not(:last-child)]:hidden';
+  `${socialCircleClass} min-[960px]:max-[1100px]:h-[34px] min-[960px]:max-[1100px]:w-[34px] max-[900px]:[&:not(:last-child)]:hidden`;
 
 const menuButtonClass = `${iconButtonClass} min-[901px]:hidden`;
 
@@ -31,19 +34,24 @@ const mobileMenuClass =
 const mobileLinkClass =
   "relative flex items-center justify-between border-b border-[var(--rule)] py-4 font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[1.25rem] font-[620] uppercase tracking-[-0.018em] after:h-px after:w-12 after:bg-[var(--ink)] after:opacity-0 after:transition-opacity after:duration-300 after:ease-out hover:after:opacity-100 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-[var(--ink)] focus-visible:after:opacity-100";
 
+const mobileSocialClass = `${socialCircleClass} h-11 w-11`;
+
 const iconLinks = [
   {
     label: 'Email',
+    ariaLabel: 'Email Houssen',
     href: `mailto:${profile.email}`,
     icon: Mail,
   },
   {
     label: 'LinkedIn',
+    ariaLabel: 'Houssen on LinkedIn',
     href: profile.links.linkedin,
     icon: Linkedin,
   },
   {
     label: 'GitHub',
+    ariaLabel: 'Houssen on GitHub',
     href: profile.links.github,
     icon: Github,
   },
@@ -111,17 +119,17 @@ export function Navbar() {
           </nav>
 
           <div className={actionsClass} aria-label="Contact and social links">
-            {iconLinks.map(({ label, href, icon: Icon }) => (
+            {iconLinks.map(({ label, ariaLabel, href, icon: Icon }) => (
               <a
                 className={iconButtonClass}
                 href={href}
-                aria-label={label}
+                aria-label={ariaLabel}
                 title={label}
                 target={label === 'Email' ? undefined : '_blank'}
                 rel={label === 'Email' ? undefined : 'noopener noreferrer'}
                 key={label}
               >
-                <Icon aria-hidden="true" size={16} strokeWidth={1.7} />
+                <Icon aria-hidden="true" color="currentColor" size={16} strokeWidth={1.7} />
               </a>
             ))}
             <button
@@ -135,9 +143,9 @@ export function Navbar() {
               type="button"
             >
               {isMenuOpen ? (
-                <X aria-hidden="true" size={17} strokeWidth={1.7} />
+                <X aria-hidden="true" color="currentColor" size={17} strokeWidth={1.7} />
               ) : (
-                <Menu aria-hidden="true" size={17} strokeWidth={1.7} />
+                <Menu aria-hidden="true" color="currentColor" size={17} strokeWidth={1.7} />
               )}
             </button>
           </div>
@@ -164,6 +172,25 @@ export function Navbar() {
             {item.toUpperCase()}
           </a>
         ))}
+
+        <div className="mt-6 border-t border-[var(--rule)] pt-5">
+          <div className="flex items-center gap-3" aria-label="Social links">
+            {iconLinks.map(({ label, ariaLabel, href, icon: Icon }) => (
+              <a
+                aria-label={ariaLabel}
+                className={mobileSocialClass}
+                href={href}
+                key={label}
+                onClick={closeMenu}
+                rel={label === 'Email' ? undefined : 'noopener noreferrer'}
+                target={label === 'Email' ? undefined : '_blank'}
+                title={label}
+              >
+                <Icon aria-hidden="true" color="currentColor" size={17} strokeWidth={1.7} />
+              </a>
+            ))}
+          </div>
+        </div>
       </nav>
     </>
   );
