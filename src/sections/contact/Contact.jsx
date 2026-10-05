@@ -34,7 +34,7 @@ const eyebrowClass =
   "mb-[clamp(28px,4vw,54px)] flex items-center gap-3 font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[0.72rem] font-[560] leading-none uppercase tracking-[0.035em] text-[rgba(245,243,238,0.58)] max-[680px]:mb-7";
 
 const headlineClass =
-  "m-0 font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[clamp(4.1rem,7vw,8.2rem)] font-[780] uppercase leading-[0.84] tracking-[-0.058em] min-[960px]:max-[1279px]:text-[clamp(4rem,8vw,7rem)] min-[681px]:max-[959px]:text-[clamp(4.4rem,12.5vw,7rem)] max-[680px]:text-[clamp(3.35rem,17vw,5.2rem)]";
+  "m-0 font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[clamp(4.1rem,7vw,8.2rem)] font-[780] uppercase leading-[0.84] tracking-[-0.058em] min-[960px]:max-[1279px]:text-[clamp(4rem,8vw,7rem)] min-[681px]:max-[959px]:text-[clamp(4.4rem,12.5vw,7rem)] max-[680px]:text-[clamp(2.5rem,10.5vw,3.25rem)] max-[680px]:leading-[0.88] max-[680px]:tracking-[-0.05em]";
 
 const copyClass =
   "m-0 max-w-[390px] font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[clamp(1rem,1.08vw,1.12rem)] font-[410] leading-[1.34] tracking-[-0.01em] text-[rgba(245,243,238,0.72)] min-[681px]:max-[959px]:max-w-[520px] max-[680px]:max-w-none";
@@ -91,7 +91,7 @@ export function Contact() {
 
               <h2 className={headlineClass} id="contact-title">
                 <span className="block">LET&apos;S BUILD</span>
-                <span className="block xl:whitespace-nowrap">
+                <span className="block max-[680px]:whitespace-nowrap xl:whitespace-nowrap">
                   <span>SOMETHING </span>
                   <span className="text-[rgba(245,243,238,0.42)]">GREAT</span>
                 </span>
