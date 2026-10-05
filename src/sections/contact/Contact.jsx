@@ -25,19 +25,19 @@ const footerLinks = [
 const sectionClass =
   'border-t border-[rgba(245,243,238,0.18)] bg-[var(--ink)] px-[var(--gutter)] py-[clamp(64px,8vw,126px)] pb-[clamp(28px,4vw,54px)] text-[var(--paper)] min-[681px]:max-[959px]:px-8 min-[681px]:max-[959px]:py-16 min-[681px]:max-[959px]:pb-8 max-[680px]:overflow-x-clip max-[680px]:py-12 max-[680px]:pb-7';
 
-const innerClass = 'mx-auto max-w-[1600px]';
+const innerClass = 'mx-auto max-w-[1600px] max-[360px]:w-full max-[360px]:min-w-0 max-[360px]:max-w-full';
 
 const mainClass =
-  'grid gap-[clamp(34px,5vw,78px)] xl:grid-cols-[minmax(0,0.72fr)_minmax(300px,0.28fr)] xl:items-center min-[960px]:max-[1279px]:grid-cols-[minmax(0,0.64fr)_minmax(280px,0.36fr)] min-[960px]:max-[1279px]:items-center min-[960px]:max-[1279px]:gap-10';
+  'grid gap-[clamp(34px,5vw,78px)] xl:grid-cols-[minmax(0,0.72fr)_minmax(300px,0.28fr)] xl:items-center min-[960px]:max-[1279px]:grid-cols-[minmax(0,0.64fr)_minmax(280px,0.36fr)] min-[960px]:max-[1279px]:items-center min-[960px]:max-[1279px]:gap-10 max-[360px]:w-full max-[360px]:min-w-0 max-[360px]:max-w-full';
 
 const eyebrowClass =
   "mb-[clamp(28px,4vw,54px)] flex items-center gap-3 font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[0.72rem] font-[560] leading-none uppercase tracking-[0.035em] text-[rgba(245,243,238,0.58)] max-[680px]:mb-7";
 
 const headlineClass =
-  "m-0 font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[clamp(4.1rem,7vw,8.2rem)] font-[780] uppercase leading-[0.84] tracking-[-0.058em] min-[960px]:max-[1279px]:text-[clamp(4rem,8vw,7rem)] min-[681px]:max-[959px]:text-[clamp(4.4rem,12.5vw,7rem)] max-[680px]:text-[clamp(2.5rem,10.5vw,3.25rem)] max-[680px]:leading-[0.88] max-[680px]:tracking-[-0.05em] max-[360px]:text-[2rem] max-[360px]:leading-[0.9] max-[360px]:tracking-[-0.055em]";
+  "m-0 font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[clamp(4.1rem,7vw,8.2rem)] font-[780] uppercase leading-[0.84] tracking-[-0.058em] min-[960px]:max-[1279px]:text-[clamp(4rem,8vw,7rem)] min-[681px]:max-[959px]:text-[clamp(4.4rem,12.5vw,7rem)] max-[680px]:text-[clamp(2.5rem,10.5vw,3.25rem)] max-[680px]:leading-[0.88] max-[680px]:tracking-[-0.05em] max-[360px]:w-full max-[360px]:min-w-0 max-[360px]:max-w-full max-[360px]:text-[2rem] max-[360px]:leading-[0.9] max-[360px]:tracking-[-0.055em]";
 
 const copyClass =
-  "m-0 max-w-[390px] font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[clamp(1rem,1.08vw,1.12rem)] font-[410] leading-[1.34] tracking-[-0.01em] text-[rgba(245,243,238,0.72)] min-[681px]:max-[959px]:max-w-[520px] max-[680px]:max-w-none";
+  "m-0 max-w-[390px] font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[clamp(1rem,1.08vw,1.12rem)] font-[410] leading-[1.34] tracking-[-0.01em] text-[rgba(245,243,238,0.72)] min-[681px]:max-[959px]:max-w-[520px] max-[680px]:max-w-none max-[360px]:w-full max-[360px]:min-w-0 max-[360px]:max-w-full";
 
 const ctaClass =
   "group inline-flex w-fit cursor-pointer items-center gap-3 border-0 bg-[var(--paper)] px-5 py-3 font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[0.78rem] font-[560] uppercase tracking-[0.025em] text-[var(--ink)] transition-colors duration-300 ease-out hover:bg-[#e9e5dc] focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-[var(--paper)]";
@@ -81,7 +81,7 @@ export function Contact() {
       <section className={sectionClass} id="contact" aria-labelledby="contact-title">
         <div className={innerClass}>
           <div className={mainClass}>
-            <div>
+            <div className="max-[360px]:w-full max-[360px]:min-w-0 max-[360px]:max-w-full">
               <p className={eyebrowClass}>
                 <span>05</span>
                 <span>/</span>
@@ -91,7 +91,7 @@ export function Contact() {
 
               <h2 className={headlineClass} id="contact-title">
                 <span className="block">LET&apos;S BUILD</span>
-                <span className="block max-w-full overflow-visible max-[680px]:whitespace-nowrap max-[360px]:text-[1.82rem] max-[360px]:tracking-[-0.06em] max-[360px]:whitespace-nowrap xl:whitespace-nowrap">
+                <span className="block max-w-full overflow-visible max-[680px]:whitespace-nowrap max-[360px]:max-w-full max-[360px]:text-[clamp(1.62rem,8.2vw,1.78rem)] max-[360px]:tracking-[-0.06em] max-[360px]:whitespace-nowrap xl:whitespace-nowrap">
                   <span>SOMETHING </span>
                   <span className="text-[rgba(245,243,238,0.42)]">GREAT</span>
                 </span>
