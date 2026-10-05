@@ -91,7 +91,7 @@ export function Contact() {
 
               <h2 className={headlineClass} id="contact-title">
                 <span className="block">LET&apos;S BUILD</span>
-                <span className="block max-[680px]:whitespace-nowrap xl:whitespace-nowrap">
+                <span className="block max-w-full overflow-visible max-[680px]:whitespace-nowrap max-[360px]:text-[1.82rem] max-[360px]:tracking-[-0.06em] max-[360px]:whitespace-nowrap xl:whitespace-nowrap">
                   <span>SOMETHING </span>
                   <span className="text-[rgba(245,243,238,0.42)]">GREAT</span>
                 </span>
