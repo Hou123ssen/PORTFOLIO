@@ -1,4 +1,5 @@
-import { Github, Linkedin, Mail, Menu } from 'lucide-react';
+import { Github, Linkedin, Mail, Menu, X } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import { navItems, profile } from '../../data/profile.js';
 
 const headerClass =
@@ -17,7 +18,18 @@ const actionsClass =
   'flex items-center justify-self-end gap-2 min-[960px]:max-[1100px]:gap-1.5';
 
 const iconButtonClass =
-  'inline-grid h-9 w-9 cursor-pointer place-items-center rounded-full border border-[rgba(17,17,15,0.2)] bg-transparent text-[var(--ink)] min-[960px]:max-[1100px]:h-[34px] min-[960px]:max-[1100px]:w-[34px] max-[680px]:[&:not(:last-child)]:hidden';
+  'inline-grid h-9 w-9 cursor-pointer place-items-center rounded-full border border-[rgba(17,17,15,0.2)] bg-transparent text-[var(--ink)] transition-all duration-300 ease-out hover:scale-[1.04] hover:border-[var(--ink)] hover:bg-[var(--ink)] hover:text-[var(--paper)] focus-visible:scale-[1.04] focus-visible:border-[var(--ink)] focus-visible:bg-[var(--ink)] focus-visible:text-[var(--paper)] focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-[var(--ink)] min-[960px]:max-[1100px]:h-[34px] min-[960px]:max-[1100px]:w-[34px] max-[900px]:[&:not(:last-child)]:hidden';
+
+const menuButtonClass = `${iconButtonClass} min-[901px]:hidden`;
+
+const navLinkClass =
+  "relative inline-flex py-1 after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-[var(--ink)] after:transition-transform after:duration-300 after:ease-out hover:after:scale-x-100 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-[var(--ink)] focus-visible:after:scale-x-100";
+
+const mobileMenuClass =
+  'fixed inset-x-0 top-[68px] z-[39] border-b border-[var(--rule)] bg-[var(--paper)] px-[var(--gutter)] py-8 text-[var(--ink)] transition-all duration-300 ease-out max-[680px]:top-[64px] max-[680px]:px-4';
+
+const mobileLinkClass =
+  "relative flex items-center justify-between border-b border-[var(--rule)] py-4 font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[1.25rem] font-[620] uppercase tracking-[-0.018em] after:h-px after:w-12 after:bg-[var(--ink)] after:opacity-0 after:transition-opacity after:duration-300 after:ease-out hover:after:opacity-100 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-[var(--ink)] focus-visible:after:opacity-100";
 
 const iconLinks = [
   {
@@ -38,40 +50,121 @@ const iconLinks = [
 ];
 
 export function Navbar() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+  const buttonRef = useRef(null);
+
+  useEffect(() => {
+    if (!isMenuOpen) {
+      return undefined;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setIsMenuOpen(false);
+        buttonRef.current?.focus();
+      }
+    };
+
+    const handlePointerDown = (event) => {
+      if (
+        menuRef.current?.contains(event.target) ||
+        buttonRef.current?.contains(event.target)
+      ) {
+        return;
+      }
+
+      setIsMenuOpen(false);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('pointerdown', handlePointerDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('pointerdown', handlePointerDown);
+    };
+  }, [isMenuOpen]);
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
-    <header className={headerClass} data-nav>
-      <div className={shellClass}>
-        <a className={logoClass} href="/" aria-label="Houssen Doudli home">
-          {profile.logo}
-        </a>
+    <>
+      <header className={headerClass} data-nav>
+        <div className={shellClass}>
+          <a className={logoClass} href="/" aria-label="Houssen Doudli home">
+            {profile.logo}
+          </a>
 
-        <nav className={linksClass} aria-label="Primary navigation">
-          {navItems.map((item) => (
-            <a href={`#${item.toLowerCase()}`} key={item}>
-              {item}
-            </a>
-          ))}
-        </nav>
+          <nav className={linksClass} aria-label="Primary navigation">
+            {navItems.map((item) => (
+              <a className={navLinkClass} href={`#${item.toLowerCase()}`} key={item}>
+                {item}
+              </a>
+            ))}
+          </nav>
 
-        <div className={actionsClass} aria-label="Contact and social links">
-          {iconLinks.map(({ label, href, icon: Icon }) => (
-            <a
-              className={iconButtonClass}
-              href={href}
-              aria-label={label}
-              title={label}
-              target={label === 'Email' ? undefined : '_blank'}
-              rel={label === 'Email' ? undefined : 'noreferrer'}
-              key={label}
+          <div className={actionsClass} aria-label="Contact and social links">
+            {iconLinks.map(({ label, href, icon: Icon }) => (
+              <a
+                className={iconButtonClass}
+                href={href}
+                aria-label={label}
+                title={label}
+                target={label === 'Email' ? undefined : '_blank'}
+                rel={label === 'Email' ? undefined : 'noopener noreferrer'}
+                key={label}
+              >
+                <Icon aria-hidden="true" size={16} strokeWidth={1.7} />
+              </a>
+            ))}
+            <button
+              aria-controls="mobile-navigation"
+              aria-expanded={isMenuOpen}
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+              className={menuButtonClass}
+              onClick={() => setIsMenuOpen((current) => !current)}
+              ref={buttonRef}
+              title={isMenuOpen ? 'Close menu' : 'Menu'}
+              type="button"
             >
-              <Icon aria-hidden="true" size={16} strokeWidth={1.7} />
-            </a>
-          ))}
-          <button className={iconButtonClass} type="button" aria-label="Open menu" title="Menu">
-            <Menu aria-hidden="true" size={17} strokeWidth={1.7} />
-          </button>
+              {isMenuOpen ? (
+                <X aria-hidden="true" size={17} strokeWidth={1.7} />
+              ) : (
+                <Menu aria-hidden="true" size={17} strokeWidth={1.7} />
+              )}
+            </button>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      <nav
+        aria-label="Mobile navigation"
+        className={`${mobileMenuClass} ${
+          isMenuOpen
+            ? 'pointer-events-auto translate-y-0 opacity-100'
+            : 'pointer-events-none -translate-y-3 opacity-0'
+        } min-[901px]:hidden`}
+        id="mobile-navigation"
+        ref={menuRef}
+      >
+        {navItems.map((item) => (
+          <a
+            className={mobileLinkClass}
+            href={`#${item.toLowerCase()}`}
+            key={item}
+            onClick={closeMenu}
+          >
+            {item.toUpperCase()}
+          </a>
+        ))}
+      </nav>
+    </>
   );
 }

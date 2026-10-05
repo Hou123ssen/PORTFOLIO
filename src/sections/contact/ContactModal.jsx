@@ -35,7 +35,7 @@ const fieldClass =
   "h-[42px] w-full border border-[rgba(17,17,15,0.2)] bg-[var(--paper)] px-3.5 py-2 font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[0.95rem] font-[410] leading-[1.2] text-[var(--ink)] outline-none transition-colors duration-300 ease-out placeholder:text-[rgba(17,17,15,0.36)] focus:border-[var(--ink)] focus-visible:border-[var(--ink)]";
 
 const submitClass =
-  "group inline-flex h-[44px] w-full items-center justify-center gap-3 bg-[var(--ink)] px-5 py-2.5 font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[0.78rem] font-[560] uppercase tracking-[0.025em] text-[var(--paper)] transition-colors duration-300 ease-out disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-[var(--ink)]";
+  "group inline-flex h-[44px] w-full items-center justify-center gap-3 border border-[var(--ink)] bg-[var(--ink)] px-5 py-2.5 font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[0.78rem] font-[560] uppercase tracking-[0.025em] text-[var(--paper)] transition-colors duration-300 ease-out hover:bg-transparent hover:text-[var(--ink)] disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-[var(--ink)] disabled:hover:text-[var(--paper)] focus-visible:bg-transparent focus-visible:text-[var(--ink)] focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-[var(--ink)]";
 
 const statusText = {
   success: {
@@ -176,7 +176,7 @@ export function ContactModal({ isOpen, onClose, onSuccessComplete }) {
 
           <button
             aria-label="Close contact form"
-            className="grid h-9 w-9 shrink-0 place-items-center border border-[rgba(17,17,15,0.2)] bg-transparent font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[1.45rem] leading-none text-[var(--ink)] transition-colors duration-300 ease-out hover:bg-[var(--ink)] hover:text-[var(--paper)] focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-[var(--ink)]"
+            className="grid h-9 w-9 shrink-0 place-items-center border border-[rgba(17,17,15,0.2)] bg-transparent font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[1.45rem] leading-none text-[var(--ink)] transition-all duration-300 ease-out hover:scale-[1.04] hover:border-[var(--ink)] hover:bg-[var(--ink)] hover:text-[var(--paper)] focus-visible:scale-[1.04] focus-visible:border-[var(--ink)] focus-visible:bg-[var(--ink)] focus-visible:text-[var(--paper)] focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-[var(--ink)]"
             onClick={onClose}
             type="button"
           >

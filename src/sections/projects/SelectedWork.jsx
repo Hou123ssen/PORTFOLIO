@@ -114,7 +114,12 @@ function ProjectCard({ project }) {
 
               <span className="mt-[clamp(18px,2.1vw,28px)] inline-flex items-center gap-3 font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[0.75rem] font-[560] uppercase tracking-[0.02em]">
                 {project.ctaLabel}
-                <span aria-hidden="true">{'\u2192'}</span>
+                <span
+                  className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-1 group-focus-visible:translate-x-1"
+                  aria-hidden="true"
+                >
+                  {'\u2192'}
+                </span>
               </span>
             </div>
           </figcaption>

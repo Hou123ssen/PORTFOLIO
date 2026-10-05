@@ -40,7 +40,7 @@ const copyClass =
   "m-0 max-w-[390px] font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[clamp(1rem,1.08vw,1.12rem)] font-[410] leading-[1.34] tracking-[-0.01em] text-[rgba(245,243,238,0.72)] min-[681px]:max-[959px]:max-w-[520px] max-[680px]:max-w-none max-[360px]:w-full max-[360px]:min-w-0 max-[360px]:max-w-full";
 
 const ctaClass =
-  "group inline-flex w-fit cursor-pointer items-center gap-3 border-0 bg-[var(--paper)] px-5 py-3 font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[0.78rem] font-[560] uppercase tracking-[0.025em] text-[var(--ink)] transition-colors duration-300 ease-out hover:bg-[#e9e5dc] focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-[var(--paper)]";
+  "group inline-flex w-fit cursor-pointer items-center gap-3 border border-[var(--paper)] bg-[var(--paper)] px-5 py-3 font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[0.78rem] font-[560] uppercase tracking-[0.025em] text-[var(--ink)] transition-colors duration-300 ease-out hover:border-[#e9e5dc] hover:bg-[#e9e5dc] focus-visible:border-[#e9e5dc] focus-visible:bg-[#e9e5dc] focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-[var(--paper)]";
 
 const footerClass =
   'mt-[clamp(58px,8vw,120px)] border-t border-[rgba(245,243,238,0.16)] pt-[clamp(22px,2.7vw,36px)]';

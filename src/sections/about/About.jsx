@@ -34,7 +34,7 @@ const descriptionClass =
   "m-0 max-w-[680px] font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[clamp(1rem,1.14vw,1.16rem)] font-[410] leading-[1.35] tracking-[-0.012em] text-[var(--muted)] min-[681px]:max-[959px]:max-w-none max-[680px]:max-w-none max-[680px]:text-[1rem]";
 
 const ctaClass =
-  "group inline-flex w-fit items-center gap-3 bg-[var(--ink)] px-5 py-3 font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[0.78rem] font-[560] uppercase tracking-[0.025em] text-[#f5f3ee] transition-colors duration-300 ease-out focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-[var(--ink)]";
+  "group inline-flex w-fit items-center gap-3 border border-[var(--ink)] bg-[var(--ink)] px-5 py-3 font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-[0.78rem] font-[560] uppercase tracking-[0.025em] text-[#f5f3ee] transition-colors duration-300 ease-out hover:bg-transparent hover:text-[var(--ink)] focus-visible:bg-transparent focus-visible:text-[var(--ink)] focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-[var(--ink)]";
 
 const statsClass =
   'grid self-start border-y border-[var(--rule)] xl:border-t-0 min-[960px]:max-[1279px]:border-t-0 min-[681px]:max-[959px]:col-span-2 min-[681px]:max-[959px]:grid-cols-3 min-[681px]:max-[959px]:border-y max-[680px]:border-y';
@@ -79,9 +79,9 @@ export function About() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span className="text-[#f5f3ee]">VIEW MY CV</span>
+            <span className="transition-colors duration-300 ease-out group-hover:text-[var(--ink)] group-focus-visible:text-[var(--ink)]">VIEW MY CV</span>
             <span
-              className="inline-block text-[#f5f3ee] transition-transform duration-300 ease-out group-hover:translate-x-1 group-focus-visible:translate-x-1"
+              className="inline-block transition duration-300 ease-out group-hover:translate-x-1 group-hover:text-[var(--ink)] group-focus-visible:translate-x-1 group-focus-visible:text-[var(--ink)]"
               aria-hidden="true"
             >
               {'\u2192'}
