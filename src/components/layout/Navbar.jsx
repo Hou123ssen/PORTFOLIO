@@ -18,7 +18,7 @@ const actionsClass =
   'flex items-center justify-self-end gap-2 min-[960px]:max-[1100px]:gap-1.5';
 
 const socialCircleClass =
-  'group inline-grid h-9 w-9 cursor-pointer place-items-center rounded-full border border-[rgba(17,17,15,0.2)] bg-transparent text-[var(--ink)] transition-all duration-300 ease-out hover:scale-[1.04] hover:border-[var(--ink)] hover:bg-[var(--ink)] hover:text-[var(--paper)] focus-visible:scale-[1.04] focus-visible:border-[var(--ink)] focus-visible:bg-[var(--ink)] focus-visible:text-[var(--paper)] focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-[var(--ink)] [&_svg]:stroke-current';
+  'inline-grid h-9 w-9 cursor-pointer place-items-center rounded-full border border-[rgba(17,17,15,0.2)] bg-transparent text-[var(--ink)] transition-all duration-300 ease-out hover:scale-[1.04] hover:border-[var(--ink)] hover:bg-[var(--ink)] hover:text-[var(--paper)] focus-visible:scale-[1.04] focus-visible:border-[var(--ink)] focus-visible:bg-[var(--ink)] focus-visible:text-[var(--paper)] focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-[var(--ink)] [&_svg]:stroke-current';
 
 const iconButtonClass =
   `${socialCircleClass} min-[960px]:max-[1100px]:h-[34px] min-[960px]:max-[1100px]:w-[34px] max-[900px]:[&:not(:last-child)]:hidden`;
