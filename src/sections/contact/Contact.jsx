@@ -172,7 +172,7 @@ export function Contact() {
       />
       <div
         aria-live="polite"
-        className={`fixed bottom-5 right-5 z-[90] max-w-[min(360px,calc(100vw-32px))] border border-[rgba(245,243,238,0.18)] bg-[var(--ink)] px-4 py-3 font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-sm font-[420] leading-[1.25] tracking-[-0.005em] text-[var(--paper)] transition-all duration-300 ease-out max-[680px]:left-4 max-[680px]:right-4 max-[680px]:bottom-4 max-[680px]:max-w-none ${
+        className={`fixed bottom-5 right-5 z-[90] max-w-[min(360px,calc(100vw-32px))] border border-[rgba(17,17,15,0.18)] bg-[var(--paper)] px-4 py-3 font-['Helvetica_Neue',Helvetica,Arial,ui-sans-serif,system-ui,sans-serif] text-sm font-[420] leading-[1.25] tracking-[-0.005em] text-[var(--ink)] transition-all duration-300 ease-out max-[680px]:left-4 max-[680px]:right-4 max-[680px]:bottom-4 max-[680px]:max-w-none ${
           isToastVisible
             ? 'translate-y-0 opacity-100'
             : 'pointer-events-none translate-y-3 opacity-0'
