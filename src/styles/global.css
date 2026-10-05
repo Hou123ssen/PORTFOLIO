@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+:root {
+  color: #11110f;
+  background: #fafaf8;
+  font-family:
+    "Helvetica Neue", Helvetica, Arial, ui-sans-serif, system-ui, sans-serif;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  --paper: #fafaf8;
+  --ink: #11110f;
+  --muted: #73716c;
+  --rule: rgba(17, 17, 15, 0.14);
+  --gutter: clamp(24px, 5.6vw, 84px);
+  --navbar-height: 76px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+html.lenis {
+  min-width: 320px;
+  background: var(--paper);
+  scroll-behavior: auto;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+html::-webkit-scrollbar,
+html.lenis::-webkit-scrollbar,
+html.lenis-smooth::-webkit-scrollbar,
+html.lenis-scrolling::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+}
+
+body,
+body.lenis {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: clip;
+  overflow-y: visible;
+  background: var(--paper);
+  color: var(--ink);
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+body::-webkit-scrollbar,
+body.lenis::-webkit-scrollbar,
+body.lenis-smooth::-webkit-scrollbar,
+body.lenis-scrolling::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Layer scale: solid headline 1, supporting copy 3, portrait 4, outline headline 6, tech strip 8, navigation 40. */
+.hero-headline-solid {
+  z-index: 1;
+}
+
+.hero-headline-outline {
+  z-index: 6;
+  color: transparent;
+  pointer-events: none;
+  opacity: 1;
+  mix-blend-mode: normal;
+  filter: none;
+  text-shadow: none;
+}
+
+.hero-headline > span {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.hero-headline > span > span {
+  position: relative;
+  z-index: 1;
+  display: block;
+  white-space: nowrap;
+}
+
+.hero-headline em {
+  color: #4f4e4a;
+  font-style: normal;
+}
+
+.hero-headline .tone {
+  color: #5c5a55;
+}
+
+.hero-headline-outline > span:first-child > span {
+  color: transparent;
+  -webkit-text-stroke: 0;
+  text-stroke: 0;
+}
+
+.hero-headline-outline > span:last-child > span {
+  color: transparent;
+  -webkit-text-stroke: 1.5px #f5f3ee;
+  text-stroke: 1.5px #f5f3ee;
+}
+
+@media (min-width: 1280px) and (max-height: 800px) {
+  /*
+   * Short desktop / laptop only.
+   *
+   * Keep the headline safely below the navbar and make the lower
+   * composition consume the remaining Hero height so the portrait
+   * finishes naturally close to the TechStrip.
+   */
+  .hero-inner {
+    display: grid;
+    grid-template-rows: auto 1fr;
+
+    padding-top: clamp(42px, 6dvh, 52px);
+  }
+
+  .hero-headline-stage {
+    font-size: clamp(98px, min(12vw, 18.4dvh), 152px);
+  }
+
+  .hero-lower {
+    width: 100%;
+    align-self: end;
+
+    min-height: clamp(330px, 43dvh, 370px);
+    margin-top: clamp(-22px, -1.6dvh, -12px);
+  }
+
+  .hero-role {
+    padding-bottom: clamp(52px, 8dvh, 68px);
+  }
+
+  .scroll-cue {
+    margin-top: clamp(18px, 2.5dvh, 26px);
+  }
+
+  .hero-portrait {
+    width: clamp(500px, min(42vw, 76dvh), 600px);
+  }
+
+  .hero-copy {
+    padding-bottom: clamp(28px, 4.5dvh, 44px);
+  }
+}
+/* Prevent the large desktop headline glyphs from being clipped
+   while preserving the masked GSAP reveal animation. */
+@media (min-width: 1181px) {
+  .hero-headline > span:first-child {
+    padding-top: 0.1em;
+    margin-top: -0.1em;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
