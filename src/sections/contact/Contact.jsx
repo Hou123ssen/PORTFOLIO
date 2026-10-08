@@ -163,14 +163,15 @@ export function Contact() {
           );
       };
 
-      const createFooterTimeline = () => {
+      const createFooterTimeline = (end = 'bottom bottom') => {
         gsap.timeline({
           defaults: { ease: 'none' },
           scrollTrigger: {
             trigger: root.querySelector('[data-footer]'),
             start: 'top 95%',
-            end: 'bottom bottom',
+            end,
             scrub: 0.6,
+            invalidateOnRefresh: true,
           },
         })
           .fromTo(
@@ -190,10 +191,10 @@ export function Contact() {
       media.add('(max-width: 680px)', () => {
         createContactTimeline({
           start: 'top 90%',
-          end: 'bottom bottom',
+          end: () => ScrollTrigger.maxScroll(window),
           scrub: 0.65,
         });
-        createFooterTimeline();
+        createFooterTimeline(() => ScrollTrigger.maxScroll(window));
       });
 
       media.add('(min-width: 681px)', () => {
