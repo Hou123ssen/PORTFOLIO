@@ -108,6 +108,20 @@ export function Contact() {
     const ctx = gsap.context(() => {
       const media = gsap.matchMedia();
 
+      const getMobileSafeEnd = (trigger, startViewportPercent, margin) => {
+        const viewportHeight =
+          window.visualViewport?.height ?? window.innerHeight;
+        const startPosition =
+          trigger.getBoundingClientRect().top +
+          window.scrollY -
+          viewportHeight * startViewportPercent;
+
+        return Math.max(
+          startPosition + 1,
+          ScrollTrigger.maxScroll(window) - margin,
+        );
+      };
+
       const createContactTimeline = ({ start, end, scrub }) => {
         gsap.timeline({
           defaults: { ease: 'none' },
@@ -191,10 +205,11 @@ export function Contact() {
       media.add('(max-width: 680px)', () => {
         createContactTimeline({
           start: 'top 85%',
-          end: 'top 30%',
+          end: () => getMobileSafeEnd(root, 0.85, 150),
           scrub: 0.65,
         });
-        createFooterTimeline(() => ScrollTrigger.maxScroll(window));
+        const footer = root.querySelector('[data-footer]');
+        createFooterTimeline(() => getMobileSafeEnd(footer, 0.95, 24));
       });
 
       media.add('(min-width: 681px)', () => {
@@ -206,7 +221,29 @@ export function Contact() {
         createFooterTimeline();
       });
 
+      const mobileViewport = window.matchMedia('(max-width: 680px)');
+      let refreshTimer;
+      const refreshMobileGeometry = () => {
+        if (!mobileViewport.matches) return;
+        window.clearTimeout(refreshTimer);
+        refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 120);
+      };
+
+      if (mobileViewport.matches) {
+        window.addEventListener('orientationchange', refreshMobileGeometry);
+        window.visualViewport?.addEventListener(
+          'resize',
+          refreshMobileGeometry,
+        );
+      }
+
       return () => {
+        window.clearTimeout(refreshTimer);
+        window.removeEventListener('orientationchange', refreshMobileGeometry);
+        window.visualViewport?.removeEventListener(
+          'resize',
+          refreshMobileGeometry,
+        );
         media.revert();
       };
     }, root);
