@@ -76,7 +76,7 @@ button {
 
 /* Layer scale: solid headline 1, supporting copy 3, portrait 4, outline headline 6, tech strip 8, navigation 40. */
 .hero-headline-solid {
-  z-index: 1;
+  z-index: 2;
 }
 
 .hero-headline-outline {

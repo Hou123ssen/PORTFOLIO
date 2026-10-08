@@ -1,6 +1,7 @@
 import { Github, Linkedin, Mail, Menu, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { navItems, profile } from '../../data/profile.js';
+import { scrollToSection } from '../../hooks/useSmoothScroll.js';
 
 const headerClass =
   'fixed top-0 left-0 z-[40] w-full border-b border-[var(--rule)] bg-[rgba(250,250,248,0.9)] backdrop-blur-[10px]';
@@ -9,8 +10,10 @@ const shellClass =
   'grid min-h-[76px] grid-cols-[1fr_auto_1fr] items-center px-[var(--gutter)] max-[1180px]:min-h-[68px] min-[960px]:max-[1100px]:min-h-[68px] min-[960px]:max-[1100px]:px-[clamp(28px,3.4vw,38px)] max-[900px]:grid-cols-[auto_1fr] max-[680px]:min-h-[64px] max-[680px]:px-4';
 
 const logoClass =
-  'justify-self-start text-[clamp(1.18rem,1.35vw,1.55rem)] font-[760] tracking-[0]';
+  'inline-flex justify-self-start text-[var(--ink)]';
 
+const logoMarkClass =
+  "block aspect-[772/392] w-11 bg-current [-webkit-mask:url('/images/hd-logo.svg')_center/contain_no-repeat] [mask:url('/images/hd-logo.svg')_center/contain_no-repeat] max-[680px]:w-10";
 const linksClass =
   'flex items-center justify-center gap-[clamp(32px,4vw,62px)] text-[0.88rem] font-[450] max-[1180px]:gap-6 min-[960px]:max-[1100px]:gap-[clamp(16px,2vw,22px)] min-[960px]:max-[1100px]:text-[0.8rem] max-[900px]:hidden';
 
@@ -18,7 +21,10 @@ const actionsClass =
   'flex items-center justify-self-end gap-2 min-[960px]:max-[1100px]:gap-1.5';
 
 const socialCircleClass =
-  'inline-grid h-9 w-9 cursor-pointer place-items-center rounded-full border border-[rgba(17,17,15,0.2)] bg-transparent text-[var(--ink)] transition-all duration-300 ease-out hover:scale-[1.04] hover:border-[var(--ink)] hover:bg-[var(--ink)] hover:text-[var(--paper)] focus-visible:scale-[1.04] focus-visible:border-[var(--ink)] focus-visible:bg-[var(--ink)] focus-visible:text-[var(--paper)] focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-[var(--ink)] [&_svg]:stroke-current';
+  'group/social inline-grid h-9 w-9 cursor-pointer place-items-center rounded-full border border-[rgba(17,17,15,0.2)] bg-transparent transition-all duration-300 ease-out hover:scale-[1.04] hover:border-[var(--ink)] hover:bg-[var(--ink)] focus-visible:scale-[1.04] focus-visible:border-[var(--ink)] focus-visible:bg-[var(--ink)] focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-[var(--ink)]';
+
+const socialIconClass =
+  'stroke-[var(--ink)] transition-colors duration-300 ease-out group-hover/social:stroke-[var(--paper)] group-focus-visible/social:stroke-[var(--paper)]';
 
 const iconButtonClass =
   `${socialCircleClass} min-[960px]:max-[1100px]:h-[34px] min-[960px]:max-[1100px]:w-[34px] max-[900px]:[&:not(:last-child)]:hidden`;
@@ -26,7 +32,7 @@ const iconButtonClass =
 const menuButtonClass = `${iconButtonClass} min-[901px]:hidden`;
 
 const navLinkClass =
-  "relative inline-flex py-1 after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-[var(--ink)] after:transition-transform after:duration-300 after:ease-out hover:after:scale-x-100 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-[var(--ink)] focus-visible:after:scale-x-100";
+  "group relative inline-flex py-1 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-[var(--ink)]";
 
 const mobileMenuClass =
   'fixed inset-x-0 top-[68px] z-[39] border-b border-[var(--rule)] bg-[var(--paper)] px-[var(--gutter)] py-8 text-[var(--ink)] transition-all duration-300 ease-out max-[680px]:top-[64px] max-[680px]:px-4';
@@ -102,18 +108,37 @@ export function Navbar() {
     setIsMenuOpen(false);
   };
 
+  const handleSectionClick = (event, item) => {
+    const hash = `#${item.toLowerCase()}`;
+    const target = document.querySelector(hash);
+
+    if (!target) return;
+
+    event.preventDefault();
+    scrollToSection(target, hash);
+  };
+
   return (
     <>
       <header className={headerClass} data-nav>
         <div className={shellClass}>
           <a className={logoClass} href="/" aria-label="Houssen Doudli home">
-            {profile.logo}
+            <span className={logoMarkClass} aria-hidden="true" />
           </a>
 
           <nav className={linksClass} aria-label="Primary navigation">
             {navItems.map((item) => (
-              <a className={navLinkClass} href={`#${item.toLowerCase()}`} key={item}>
-                {item}
+              <a
+                className={navLinkClass}
+                href={`#${item.toLowerCase()}`}
+                key={item}
+                onClick={(event) => handleSectionClick(event, item)}
+              >
+                <span>{item}</span>
+                <span
+                  className="pointer-events-none absolute left-0 -bottom-1 h-px w-full origin-left scale-x-0 bg-[var(--ink)] transition-transform duration-300 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100"
+                  aria-hidden="true"
+                />
               </a>
             ))}
           </nav>
@@ -129,7 +154,12 @@ export function Navbar() {
                 rel={label === 'Email' ? undefined : 'noopener noreferrer'}
                 key={label}
               >
-                <Icon aria-hidden="true" color="currentColor" size={16} strokeWidth={1.7} />
+                <Icon
+                  aria-hidden="true"
+                  className={`h-4 w-4 ${socialIconClass}`}
+                  color="currentColor"
+                  strokeWidth={1.7}
+                />
               </a>
             ))}
             <button
@@ -143,9 +173,19 @@ export function Navbar() {
               type="button"
             >
               {isMenuOpen ? (
-                <X aria-hidden="true" color="currentColor" size={17} strokeWidth={1.7} />
+                <X
+                  aria-hidden="true"
+                  className="h-[17px] w-[17px] stroke-current"
+                  color="currentColor"
+                  strokeWidth={1.7}
+                />
               ) : (
-                <Menu aria-hidden="true" color="currentColor" size={17} strokeWidth={1.7} />
+                <Menu
+                  aria-hidden="true"
+                  className="h-[17px] w-[17px] stroke-current"
+                  color="currentColor"
+                  strokeWidth={1.7}
+                />
               )}
             </button>
           </div>
@@ -167,7 +207,10 @@ export function Navbar() {
             className={mobileLinkClass}
             href={`#${item.toLowerCase()}`}
             key={item}
-            onClick={closeMenu}
+            onClick={(event) => {
+              closeMenu();
+              handleSectionClick(event, item);
+            }}
           >
             {item.toUpperCase()}
           </a>
@@ -186,7 +229,12 @@ export function Navbar() {
                 target={label === 'Email' ? undefined : '_blank'}
                 title={label}
               >
-                <Icon aria-hidden="true" color="currentColor" size={17} strokeWidth={1.7} />
+                <Icon
+                  aria-hidden="true"
+                  className={`h-[17px] w-[17px] ${socialIconClass}`}
+                  color="currentColor"
+                  strokeWidth={1.7}
+                />
               </a>
             ))}
           </div>
