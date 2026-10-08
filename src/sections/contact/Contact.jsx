@@ -190,8 +190,8 @@ export function Contact() {
 
       media.add('(max-width: 680px)', () => {
         createContactTimeline({
-          start: 'top 90%',
-          end: () => ScrollTrigger.maxScroll(window),
+          start: 'top 85%',
+          end: 'top 30%',
           scrub: 0.65,
         });
         createFooterTimeline(() => ScrollTrigger.maxScroll(window));
