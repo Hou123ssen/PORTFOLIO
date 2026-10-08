@@ -11,7 +11,7 @@ const stats = [
     label: 'LIVE DEPLOYMENTS',
   },
   {
-    value: '06',
+    value: '08',
     label: 'CORE TECHNOLOGIES',
   },
 ];

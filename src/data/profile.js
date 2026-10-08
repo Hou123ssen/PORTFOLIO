@@ -33,6 +33,9 @@ export const technologies = [
   'MySQL',
   'Tailwind CSS',
   'Node.js',
+  'Next.js',
+  'Expo',
+  
 ];
 
 export const selectedProjects = [
